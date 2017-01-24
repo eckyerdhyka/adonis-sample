@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"> -->
+  <link rel="stylesheet" href="/style.css">
+  <link href="http://blazeworx.com/flags.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+
+    <div class="header clearfix">
+      <nav class="row">
+        <div class="col-md-6">
+          
+          <ul class="nav nav-pills pull-xs-right">
+            <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="/about" class="nav-link">{{ antl.for(langs).formatMessage('messages.home.about') }}</a></li>
+            <li class="nav-item"><a href="/contact" class="nav-link">{{ antl.for(langs).formatMessage('messages.home.contact') }}</a></li>
+            {% if(isLoggedIn) %}
+            <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+            {% else %}
+            <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+            <li class="nav-item"><a href="/signup" class="nav-link">SignUp</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+            <label class="control-label" for="Language">Language</label>
+            <div class="form-group">
+              <!-- <div class="col-sm-6 col-md-4"> -->
+                <select id="language" class="form-control col-md-6 my-dropdown-menu">
+                  
+                  <option value="id" {% if (langs == 'id') %}selected{%endif%}>Indonesia</option>
+                  <option value="en" {% if (langs == 'en') %}selected{%endif%}>English</option>
+                </select> 
+              <!-- </div> -->
+            </div>
+        </div>
+        <h3 class="text-muted"> Adonis Blog </h3>
+      </nav>
+    </div>
+
+    <section>
+      {% block content %}{% endblock %}
+    </section>
+
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function () {
+  $('#language').on('change',function(){
+    var data = $(this).val();
+    $.get('http://localhost:3333/session',{lang:data},function(result){
+      location.reload();
+    });
+  });
+});
+</script>
+</html>
