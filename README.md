@@ -20,6 +20,18 @@ He was so excited and full of energy to build this application and share it with
 6. How the heck should I test my code? I am having hard time mocking dependencies.
 7. **WHY THE :fish:** there are no standards to write some code. Hell I am not going to write this application and going for a walk.
 
+## How To use
+
+clone : git clone https://github.com/eckyerdhyka/adonis-sample.git
+install Node module : npm install
+generate key : ./ace key:generate (if error  node --harmony_proxies ace key:generate)
+run migration : ./ace migration:run (if error node --harmony_proxies ace migration:run)
+seed dummy : ./ace db:seed (if error node --harmony_proxies ace db:seed)
+run applikasi : npm run dev 
+
+## Troubleshoot
+
+error ENOSPC => echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 ## Not Anymore
 
